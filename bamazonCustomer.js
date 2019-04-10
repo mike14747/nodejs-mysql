@@ -30,7 +30,6 @@ function promptUser() {
         console.log("\nYou entered Product ID: " + answers.productID + " and a quantity of: " + answers.quantity + "\n");
         connection.query("SELECT product_id, product_name, price, stock_quantity FROM products WHERE ? LIMIT 1", { product_id: answers.productID }, function (error, results) {
             if (error) throw error;
-            console.log("\nRequested quantity: " + answers.quantity + " | In stock: " + results[0].stock_quantity + "\n");
             if (answers.quantity > results[0].stock_quantity) {
                 console.log("There isn't sufficient stock to fill your order. You are trying to purchase " + answers.quantity + " of " + results[0].product_name + ", but we only have " + results[0].stock_quantity + " in stock.");
             } else {
