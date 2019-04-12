@@ -4,18 +4,23 @@
 
 * This project is an Amazon-like command line storefront... called Bamazon.
 
-* Running 'node bamazonCustomer' from the terminal, you can check a list of available products, then sudo-shop, select and checkout
+* Running 'node bamazonCustomer' from the terminal, you can check a list of available products, then sudo-shop and sudo-checkout
 
-* Running 'node bamazonManager' from the terminal, you can
+* Running 'node bamazonManager' from the terminal, you can check low inventory, add inventory and add new products and/or departments
 
 * Running 'node bamazonSupervisor' from the terminal, you can
 
 
-### Why the project is useful
+### Why the project is useful:
+
+* This project was useful in learning advanced 'inquirer' usage... including using:
+  * 'Validate' (to validate user input)
+  * 'When' (to allow prompts to be included oe excluded based upon user input)
+
+* It was also useful in learning the MySQL npm driver syntax and MySQL in general,
 
 
-
-### How users can get started with the project
+### How users can get started with the project:
 
 To use this project, you'll need to do the following:
 
@@ -27,7 +32,7 @@ To use this project, you'll need to do the following:
 
 * create a connection.js file in the root directory with the following contents:
 
-`var mysql = require("mysql");
+```var mysql = require("mysql");
 
 var connection = mysql.createConnection({
     database: "bamazon",
@@ -37,10 +42,10 @@ var connection = mysql.createConnection({
     password: "your_mysql_password"
 });
 
-module.exports = connection;`
+module.exports = connection;```
 
 
-### More Info about this project
+### More Info about this project:
 
 * To find out more about the npm modules used in this project:
   * https://www.npmjs.com/package/mysql
@@ -52,3 +57,4 @@ module.exports = connection;`
 * Mike Gullo
 * https://github.com/mike14747
 * Contact me at: mike4747@oh.rr.com for more info about this project.
+
