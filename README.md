@@ -32,17 +32,17 @@ To use this project, you'll need to do the following:
 
 * create a connection.js file in the root directory with the following contents:
 
-```var mysql = require("mysql");
+`var mysql = require("mysql");`
 
-var connection = mysql.createConnection({
+```var connection = mysql.createConnection({
     database: "bamazon",
     host: "localhost",
     port: 3306,
     user: "root",
     password: "your_mysql_password"
-});
+});```
 
-module.exports = connection;```
+`module.exports = connection;`
 
 
 ### More Info about this project:
