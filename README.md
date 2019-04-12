@@ -16,7 +16,6 @@
 * This project was useful in learning advanced 'inquirer' usage... including using:
   * 'Validate' (to validate user input)
   * 'When' (to allow prompts to be included oe excluded based upon user input)
-
 * It was also useful in learning the MySQL npm driver syntax and MySQL in general,
 
 
