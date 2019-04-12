@@ -4,11 +4,11 @@
 
 * This project is an Amazon-like command line storefront... called Bamazon.
 
-* Running 'node bamazonCustomer' from the terminal, you can check a list of available products, then sudo-shop and sudo-checkout
+* Running 'node bamazonCustomer.js' from the terminal, you can check a list of available products, then sudo-shop and sudo-checkout
 
-* Running 'node bamazonManager' from the terminal, the manager can check low inventory, add inventory and add new products and/or departments
+* Running 'node bamazonManager.js' from the terminal, the manager can check low inventory, add inventory and add new products and/or departments
 
-* Running 'node bamazonSupervisor' from the terminal, the supervisor can view Product Sales by Department create new Departments
+* Running 'node bamazonSupervisor.js' from the terminal, the supervisor can view Product Sales by Department create new Departments
 
 
 ### Why the project is useful:
