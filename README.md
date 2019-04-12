@@ -6,9 +6,9 @@
 
 * Running 'node bamazonCustomer' from the terminal, you can check a list of available products, then sudo-shop and sudo-checkout
 
-* Running 'node bamazonManager' from the terminal, you can check low inventory, add inventory and add new products and/or departments
+* Running 'node bamazonManager' from the terminal, the manager can check low inventory, add inventory and add new products and/or departments
 
-* Running 'node bamazonSupervisor' from the terminal, you can
+* Running 'node bamazonSupervisor' from the terminal, the supervisor can view Product Sales by Department create new Departments
 
 
 ### Why the project is useful:
@@ -16,7 +16,7 @@
 * This project was useful in learning advanced 'inquirer' usage... including using:
   * 'Validate' (to validate user input)
   * 'When' (to allow prompts to be included oe excluded based upon user input)
-* It was also useful in learning the MySQL npm driver syntax and MySQL in general,
+* It was also useful in learning the MySQL npm driver syntax and MySQL in general
 
 
 ### How users can get started with the project:
