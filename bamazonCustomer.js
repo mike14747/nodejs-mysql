@@ -82,8 +82,11 @@ function displayInv() {
             }
             console.log("Product ID: " + results[i].product_id + " - " + results[i].product_name + " ($" + results[i].price + "/ea)");
         }
-        promptUser()
+        promptUser();
     });
 }
 
-displayInv()
+connection.connect(function (err) {
+    if (err) throw err;
+    displayInv();
+});
