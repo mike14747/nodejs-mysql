@@ -13,7 +13,7 @@
 
 ### Why the project is useful:
 
-* This project was useful in learning advanced 'inquirer' usage... including using:
+* This project was useful in learning advanced 'inquirer' usage... including:
   * 'Validate' (to validate user input)
   * 'When' (to allow prompts to be included oe excluded based upon user input)
 * It was also useful in learning the MySQL npm driver syntax and MySQL in general
@@ -29,7 +29,7 @@ To use this project, you'll need to do the following:
 
 * create a mysql database using the schema in: **bamazon.sql**
 
-* create a connection.js file in the root directory with the following contents:
+* create a connection.js file with the following contents:
 
 ```
 var mysql = require("mysql");
