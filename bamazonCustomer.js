@@ -2,10 +2,10 @@
 
 var inquirer = require("inquirer");
 var connection = require("./connection.js");
-var counter = 0;
+var Table = require('cli-table');
+
 var productIDArray = [];
-var curID = 0;
-var quantityArray = [];
+var table = {};
 
 function buyAgain() {
     inquirer.prompt([
@@ -35,7 +35,6 @@ function promptUser() {
                 } else if (productIDArray.indexOf(parseInt(productID)) < 0) {
                     return false || "Product ID not found in the database!"
                 }
-                curID = productIDArray.indexOf(parseInt(productID));
                 return true;
             }
         },
@@ -43,25 +42,32 @@ function promptUser() {
             name: "quantity",
             message: "\n\nEnter the quantity of this item you'd like to purchase: ",
             validate: function validateQuantity(quantity) {
-                if (isNaN(quantity) || quantity < 0) {
+                if (isNaN(quantity) || quantity < 1) {
                     return false || "Quantity must be a number greater than 0!";
-                } else if (quantityArray[curID] < quantity) {
-                    return false || "There isn't sufficient stock to fill your order. We only have " + quantityArray[curID] + " in stock.";
                 }
                 return true;
             }
         }
     ]).then(function (answers) {
-        console.log("\nYou entered Product ID: " + answers.productID + " and a quantity of: " + answers.quantity + "\n");
-        connection.query("SELECT product_id, product_name, price, stock_quantity FROM products WHERE ? LIMIT 1", { product_id: answers.productID }, function (error, results) {
+        connection.query("SELECT product_id, product_name, price, stock_quantity FROM products WHERE ? LIMIT 1", { product_id: answers.productID }, function (error, result) {
             if (error) throw error;
-            if (results.length === 0) {
+            if (result.length === 0) {
                 console.log("\nNo products found matching that Product ID.\n");
+            } else if (result[0].stock_quantity < answers.quantity) {
+                console.log("\nThere isn't sufficient stock to fill your order. We only have " + result[0].stock_quantity + " in stock.");
+                promptUser();
             } else {
-                connection.query("UPDATE products SET ? WHERE ?", [{ stock_quantity: results[0].stock_quantity - answers.quantity }, { product_id: results[0].product_id }], function (error) {
+                connection.query("UPDATE products SET ?, product_sales = product_sales + ? WHERE ?", [{ stock_quantity: result[0].stock_quantity - answers.quantity }, result[0].price * answers.quantity, { product_id: result[0].product_id }], function (error) {
                     if (error) throw error;
                 });
-                console.log("Your Order:\nQTY: " + answers.quantity + " | Item: " + results[0].product_name + " | Each Cost: " + results[0].price + " | Total Cost: " + (results[0].price * answers.quantity).toFixed(2));
+                table = new Table({
+                    head: ['Order QTY', 'Item', 'Each Price', 'Total Cost']
+                });
+
+                table.push(
+                    [answers.quantity, result[0].product_name, '$' + result[0].price, '$' + (result[0].price * answers.quantity).toFixed(2)]
+                );
+                console.log(table.toString());
                 console.log("\nThank you for your order!\n");
                 buyAgain();
             }
@@ -70,18 +76,20 @@ function promptUser() {
 }
 
 function displayInv() {
-    connection.query("SELECT p.product_id, p.product_name, p.price, p.stock_quantity, d.department_id, d.department_name FROM products AS p INNER JOIN departments AS d ON p.department_id=d.department_id ORDER BY d.department_id ASC, p.product_id ASC", function (error, results) {
+    connection.query("SELECT p.product_id, p.product_name, p.price, p.stock_quantity, d.department_id, d.department_name FROM products AS p INNER JOIN departments AS d ON p.department_id=d.department_id WHERE p.stock_quantity>1 ORDER BY d.department_id ASC, p.product_name ASC", function (error, results) {
         if (error) throw error;
-        console.log("\n=============== Items in the Bamazon Store ===============");
+        productIDArray = [];
+        console.log("\n\n\n==================== Items in the Bamazon Store ====================\n");
+        table = new Table({
+            head: ['Product ID', 'Item', 'Each Price', 'Department', 'In Stock']
+        });
         for (let i = 0; i < results.length; i++) {
             productIDArray.push(results[i].product_id);
-            quantityArray.push(results[i].stock_quantity);
-            if (results[i].department_id != counter) {
-                console.log("\n--------------- " + results[i].department_name + " ---------------");
-                counter = results[i].department_id;
-            }
-            console.log("Product ID: " + results[i].product_id + " - " + results[i].product_name + " ($" + results[i].price + "/ea)");
+            table.push(
+                [results[i].product_id, results[i].product_name, '$' + results[i].price, results[i].department_name, results[i].stock_quantity]
+            );
         }
+        console.log(table.toString());
         promptUser();
     });
 }

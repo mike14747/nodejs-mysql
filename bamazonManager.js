@@ -23,7 +23,7 @@ function displayInv() {
 }
 
 function lowInv() {
-    connection.query("SELECT p.product_id, p.product_name, p.price, p.stock_quantity, d.department_id, d.department_name FROM products AS p INNER JOIN departments AS d ON p.department_id=d.department_id WHERE p.stock_quantity <=50 ORDER BY d.department_id ASC, p.stock_quantity DESC", function (error, results) {
+    connection.query("SELECT p.product_id, p.product_name, p.price, p.stock_quantity, d.department_id, d.department_name FROM products AS p INNER JOIN departments AS d ON p.department_id=d.department_id WHERE p.stock_quantity <=5 ORDER BY d.department_id ASC, p.stock_quantity DESC", function (error, results) {
         if (error) throw error;
         console.log("\n=============== Bamazon Low Inventory List ===============");
         if (results.length < 1) {
@@ -45,7 +45,7 @@ function addInv() {
     inquirer.prompt([
         {
             name: "productID",
-            type: "text",
+            type: "input",
             message: "\nEnter the product ID of the item you'd like to add inventory to:",
             validate: function validateID(productID) {
                 if (isNaN(productID) || parseInt(productID) <= 0) {
@@ -56,7 +56,7 @@ function addInv() {
         },
         {
             name: "quantity",
-            type: "text",
+            type: "input",
             message: "\nEnter the quantity you'd like to add to this item's inventory:",
             validate: function validateQuantity(quantity) {
                 if (isNaN(quantity) || parseInt(quantity) <= 0) {
@@ -82,7 +82,7 @@ function newProd() {
     inquirer.prompt([
         {
             name: "product_name",
-            type: "text",
+            type: "input",
             message: "\nName of the new product you're adding:",
             validate: function validateProduct(product_name) {
                 if (product_name.length < 1) {
@@ -99,7 +99,7 @@ function newProd() {
         },
         {
             name: "price",
-            type: "text",
+            type: "input",
             message: "\nEnter the price for the new product (in this format: 12.99)",
             validate: function validatePrice(price) {
                 if (isNaN(price) || parseFloat(price) <= 0 || price.length < 1) {
@@ -110,7 +110,7 @@ function newProd() {
         },
         {
             name: "stock_quantity",
-            type: "text",
+            type: "input",
             message: "\nEnter the stock quantity for this new product:",
             validate: function validateQuantity(stock_quantity) {
                 if (isNaN(stock_quantity) || parseInt(stock_quantity) < 0 || stock_quantity.length < 1) {

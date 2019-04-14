@@ -10,6 +10,7 @@ CREATE TABLE products (
     department_id INT(10),
     price DECIMAL(8,2) NOT NULL,
     stock_quantity INT(10) DEFAULT 0,
+    product_sales DECIMAL(10,2) DEFAULT 0,
     PRIMARY KEY (product_id)
 );
 
@@ -17,14 +18,14 @@ CREATE TABLE products (
 CREATE TABLE departments (
     department_id INT(10) AUTO_INCREMENT NOT NULL,
     department_name VARCHAR(30),
-    over_head_costs DECIMAL(8,2),
+    over_head_costs DECIMAL(8,2) DEFAULT 0,
     PRIMARY KEY (department_id)
 );
 
 -- inserts for apparel
 INSERT INTO products (product_name, department_id, price, stock_quantity) VALUES
-('Blue Nike T-Shirt', 1, 19.99, 38),
-('Red Nike T-Shirt', 1, 19.99, 56),
+('Nike T-Shirt (Blue)', 1, 19.99, 38),
+('Nike T-Shirt (Red)', 1, 19.99, 56),
 ('Levi Jeans', 1, 29.99, 34),
 ('Columbia Convertible Pants', 1, 49.97, 19),
 ('Paisley Socks', 1, 5.99, 19);
@@ -68,3 +69,5 @@ INSERT INTO departments (department_name, over_head_costs) VALUES
 ('Food', 1875.11),
 ('Computer', 3459.43),
 ('Toiletries', 912.86);
+
+SELECT * FROM products;
