@@ -26,7 +26,10 @@
 * Learning the basics of shopping, checkout and inventory systems of an e-commerce storefront.
 * This project was useful in further learning 'inquirer' usage... including:
   * 'Validate' (to validate user input)
-* It was also useful in learning the MySQL and the npm MySQL driver.
+* It was also useful in learning the MySQL and the npm MySQL driver... with this snippet as an example of a query from the bamazonSupervisor.js file:
+```
+"SELECT d.department_id, d.department_name, d.over_head_costs, SUM(IFNULL(p.product_sales, 0)) AS product_sales, (SUM(IFNULL(p.product_sales, 0))-d.over_head_costs) AS total_profit FROM departments AS d LEFT JOIN products AS p ON d.department_id=p.department_id GROUP BY d.department_id ORDER BY d.department_id ASC"
+```
 
 ---
 
