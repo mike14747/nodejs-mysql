@@ -29,7 +29,7 @@ function displayInv() {
 function lowInv() {
     connection.query("SELECT p.product_id, p.product_name, p.price, p.stock_quantity, d.department_id, d.department_name FROM products AS p INNER JOIN departments AS d ON p.department_id=d.department_id WHERE p.stock_quantity <=20 ORDER BY d.department_id ASC, p.product_name ASC", function (error, results) {
         if (error) throw error;
-        console.log("\n\n\n==================== Bamazon Low Inventory List ====================\n");
+        console.log("\n\n\n=============== Bamazon Low Inventory List (<20 remaining) ===============\n");
         table = new Table({
             head: ['Product ID', 'Item', 'Each Price', 'Department', 'In Stock'],
             colAligns: ['middle', 'left', 'right', 'left', 'middle']

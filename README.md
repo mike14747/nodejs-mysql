@@ -22,9 +22,8 @@
 ### Why the project is useful:
 
 * Learning the basics of shopping, checkout and inventory systems of an e-commerce storefront.
-* This project was useful in learning advanced 'inquirer' usage... including:
+* This project was useful in further learning 'inquirer' usage... including:
   * 'Validate' (to validate user input)
-  * 'When' (to allow prompts to be included oe excluded based upon user input)
 * It was also useful in learning the MySQL and the npm MySQL driver.
 
 

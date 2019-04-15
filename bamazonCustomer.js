@@ -24,6 +24,24 @@ function buyAgain() {
     });
 }
 
+function checkout(id, name, qty, price) {
+    connection.query("UPDATE products SET stock_quantity = stock_quantity - ?, product_sales = product_sales + ? WHERE ?", [ qty, (price * qty), { product_id: id }], function (error) {
+        if (error) throw error;
+    });
+    table = new Table({
+        head: ['Order QTY', 'Item', 'Each Price', 'Total Cost'],
+        colAligns: ['middle', 'left', 'right', 'right']
+    });
+
+    table.push(
+        [qty, name, '$' + price.toFixed(2), '$' + (price * qty).toFixed(2)]
+    );
+    console.log("\n\n\n=============== Bamazon Invoice ===============\n");
+    console.log(table.toString());
+    console.log("\nThank you for your order!\n");
+    buyAgain();
+}
+
 function promptUser() {
     inquirer.prompt([
         {
@@ -57,20 +75,11 @@ function promptUser() {
                 console.log("\nThere isn't sufficient stock to fill your order. We only have " + result[0].stock_quantity + " in stock.");
                 promptUser();
             } else {
-                connection.query("UPDATE products SET ?, product_sales = product_sales + ? WHERE ?", [{ stock_quantity: result[0].stock_quantity - answers.quantity }, result[0].price * answers.quantity, { product_id: result[0].product_id }], function (error) {
-                    if (error) throw error;
-                });
-                table = new Table({
-                    head: ['Order QTY', 'Item', 'Each Price', 'Total Cost'],
-                    colAligns: ['middle', 'left', 'right', 'right']
-                });
-
-                table.push(
-                    [answers.quantity, result[0].product_name, '$' + (result[0].price).toFixed(2), '$' + (result[0].price * answers.quantity).toFixed(2)]
-                );
-                console.log("\n\n" + table.toString());
-                console.log("\nThank you for your order!\n");
-                buyAgain();
+                let id = result[0].product_id;
+                let name = result[0].product_name;
+                let qty = answers.quantity;
+                let price = result[0].price;
+                checkout(id, name, qty, price);
             }
         });
     });
