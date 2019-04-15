@@ -60,8 +60,8 @@ function promptUser() {
             name: "quantity",
             message: "\n\nEnter the quantity of this item you'd like to purchase: ",
             validate: function validateQuantity(quantity) {
-                if (isNaN(quantity) || quantity < 1) {
-                    return false || "Quantity must be a number greater than 0!";
+                if (isNaN(quantity) || quantity < 1 || !Number.isInteger(parseFloat(quantity))) {
+                    return false || "Quantity must be a whole number greater than 0!";
                 }
                 return true;
             }

@@ -36,7 +36,7 @@ function lowInv() {
         });
         for (let i = 0; i < results.length; i++) {
             table.push(
-                [results[i].product_id, results[i].product_name, '$' + results[i].price, results[i].department_name, results[i].stock_quantity]
+                [results[i].product_id, results[i].product_name, '$' + results[i].price.toFixed(2), results[i].department_name, results[i].stock_quantity]
             );
         }
         console.log(table.toString());
@@ -116,8 +116,8 @@ function newProd() {
             type: "input",
             message: "\nEnter the stock quantity for this new product:",
             validate: function validateQuantity(stock_quantity) {
-                if (isNaN(stock_quantity) || parseInt(stock_quantity) < 0 || stock_quantity.length < 1) {
-                    return false || "Stock quantity must be a number greater than or equal to 0!";
+                if (isNaN(stock_quantity) || parseInt(stock_quantity) < 0 || stock_quantity.length < 1 || !Number.isInteger(parseFloat(stock_quantity))) {
+                    return false || "Stock quantity must be a whole number greater than or equal to 0!";
                 }
                 return true;
             }
