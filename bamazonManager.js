@@ -51,7 +51,7 @@ function addInv() {
             type: "input",
             message: "\nEnter the product ID of the item you'd like to add inventory to:",
             validate: function validateID(productID) {
-                if (isNaN(productID) || parseInt(productID) <= 0) {
+                if (isNaN(productID) || parseInt(productID) <= 0 || !Number.isInteger(parseFloat(productID))) {
                     return false || "ID must be a number greater than 0!";
                 }
                 return true;
@@ -62,8 +62,8 @@ function addInv() {
             type: "input",
             message: "\nEnter the quantity you'd like to add to this item's inventory:",
             validate: function validateQuantity(quantity) {
-                if (isNaN(quantity) || parseInt(quantity) <= 0) {
-                    return false || "Quantity being added must be a number greater than 0!";
+                if (isNaN(quantity) || parseInt(quantity) <= 0 || !Number.isInteger(parseFloat(quantity))) {
+                    return false || "Quantity being added must be a whole number greater than 0!";
                 }
                 return true;
             }

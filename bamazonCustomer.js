@@ -50,7 +50,7 @@ function promptUser() {
             validate: function validateID(productID) {
                 if (isNaN(productID) || parseInt(productID) <= 0) {
                     return false || "ID must be a number greater than 0!";
-                } else if (productIDArray.indexOf(parseInt(productID)) < 0) {
+                } else if (productIDArray.indexOf(parseFloat(productID)) < 0) {
                     return false || "Product ID not found in the database!"
                 }
                 return true;
