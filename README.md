@@ -119,10 +119,8 @@ If there’s not enough stock to fulfill the order:
   * The customer is sent back to being prompted to enter a product ID of what they’d like to purchase.
 
 After the purchase, the customer is prompted to buy another product (if they select Yes) or exit (if they select No).
-
 &nbsp;
 &nbsp;
-
 > **node bamazonManager.js**
 
 The manager is prompted to perform one of the following tasks:
@@ -158,10 +156,8 @@ Add New Product:
   * The new product is added… including the department_id… which is based upon the selection from the second prompt; the product_sales column is initialized at 0.
     
 As any of the above tasks are completed, the manager is sent back to the original prompt… asking them to select a task.
-
 &nbsp;
 &nbsp;
-
 > **node bamazonSupervisor.js**
 
 The supervisor is prompted to perform one of the following tasks:
