@@ -92,8 +92,8 @@ console.log("\n\n" + table.toString());
 ---
 
 ### Detailed flow chart of this project's js files:
-
-**node bamazonCustomer.js**
+&nbsp;
+> **node bamazonCustomer.js**
 
 Displays all products where stock_quantity > 0.
 
@@ -120,8 +120,10 @@ If there’s not enough stock to fulfill the order:
 
 After the purchase, the customer is prompted to buy another product (if they select Yes) or exit (if they select No).
 
+&nbsp;
+&nbsp;
 
-**node bamazonManager.js**
+> **node bamazonManager.js**
 
 The manager is prompted to perform one of the following tasks:
   * View all products for sale.
@@ -157,8 +159,10 @@ Add New Product:
     
 As any of the above tasks are completed, the manager is sent back to the original prompt… asking them to select a task.
 
+&nbsp;
+&nbsp;
 
-**node bamazonSupervisor.js**
+> **node bamazonSupervisor.js**
 
 The supervisor is prompted to perform one of the following tasks:
   * View product sales by department
