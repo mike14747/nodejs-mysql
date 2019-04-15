@@ -86,7 +86,7 @@ function promptUser() {
 }
 
 function displayInv() {
-    connection.query("SELECT p.product_id, p.product_name, p.price, p.stock_quantity, d.department_id, d.department_name FROM products AS p INNER JOIN departments AS d ON p.department_id=d.department_id WHERE p.stock_quantity>1 ORDER BY d.department_id ASC, p.product_name ASC", function (error, results) {
+    connection.query("SELECT p.product_id, p.product_name, p.price, p.stock_quantity, d.department_id, d.department_name FROM products AS p INNER JOIN departments AS d ON p.department_id=d.department_id WHERE p.stock_quantity>0 ORDER BY d.department_id ASC, p.product_name ASC", function (error, results) {
         if (error) throw error;
         productIDArray = [];
         console.log("\n\n\n==================== Items in the Bamazon Store ====================\n");
