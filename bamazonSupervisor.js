@@ -8,7 +8,7 @@ var table = {};
 var ohc = 0;
 
 function viewSales() {
-    connection.query("SELECT d.department_id, d.department_name, d.over_head_costs, SUM(IFNULL(p.product_sales, 0)) AS product_sales, (SUM(IFNULL(p.product_sales, 0))-d.over_head_costs) AS total_profit FROM departments AS d LEFT JOIN products AS p ON d.department_id=p.department_id GROUP BY d.department_id ORDER BY d.department_id ASC", function (error, results) {
+    connection.query("SELECT d.department_id, d.department_name, d.over_head_costs, IFNULL(SUM(p.product_sales), 0) AS product_sales, (IFNULL(SUM(p.product_sales), 0)-d.over_head_costs) AS total_profit FROM departments AS d LEFT JOIN products AS p ON d.department_id=p.department_id GROUP BY d.department_id ORDER BY d.department_id ASC", function (error, results) {
         if (error) throw error;
         table = new Table({
             head: ['department_id', 'department_name', 'over_head_costs', 'product_sales', 'total_profit'],
