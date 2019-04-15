@@ -1,5 +1,6 @@
 # nodejs-mysql (Bamazon)
 
+
 ### What the project does:
 
 * This project is an Amazon-like command line storefront using nodeJS... called Bamazon.
@@ -18,6 +19,7 @@
   * view Product Sales by Department
   * create new Departments
 
+---
 
 ### Why the project is useful:
 
@@ -26,6 +28,7 @@
   * 'Validate' (to validate user input)
 * It was also useful in learning the MySQL and the npm MySQL driver.
 
+---
 
 ### How users can get started with the project:
 
@@ -53,6 +56,7 @@ var connection = mysql.createConnection({
 module.exports = connection;
 ```
 
+---
 
 ### More Info about this project:
 
@@ -85,10 +89,11 @@ console.log("\n\n" + table.toString());
   * https://www.npmjs.com/package/inquirer
   * https://www.npmjs.com/package/cli-table
 
+---
 
 ### Detailed flow chart of this project's js files:
 
-#### node bamazonCustomer.js
+**node bamazonCustomer.js**
 
 Displays all products where stock_quantity > 0.
 
@@ -116,7 +121,7 @@ If there’s not enough stock to fulfill the order:
 After the purchase, the customer is prompted to buy another product (if they select Yes) or exit (if they select No).
 
 
-#### node bamazonManager.js
+**node bamazonManager.js**
 
 The manager is prompted to perform one of the following tasks:
   * View all products for sale.
@@ -153,7 +158,7 @@ Add New Product:
 As any of the above tasks are completed, the manager is sent back to the original prompt… asking them to select a task.
 
 
-#### node bamazonSupervisor.js
+**node bamazonSupervisor.js**
 
 The supervisor is prompted to perform one of the following tasks:
   * View product sales by department
@@ -178,11 +183,10 @@ Create a New Department:
 
 As any of the tasks are completed, the supervisor is returned to the above prompt to select a task.
 
-
+---
 
 ### This project was created and is maintained by:
 
 * Mike Gullo
 * https://github.com/mike14747
 * Contact me at: mike4747@oh.rr.com for more info about this project.
-
