@@ -21,10 +21,11 @@
 
 ### Why the project is useful:
 
+* Learning the basics of shopping, checkout and inventory systems of an e-commerce storefront
 * This project was useful in learning advanced 'inquirer' usage... including:
   * 'Validate' (to validate user input)
   * 'When' (to allow prompts to be included oe excluded based upon user input)
-* It was also useful in learning the MySQL npm driver syntax and MySQL in general
+* It was also useful in learning the MySQL and the npm MySQL driver
 
 
 ### How users can get started with the project:
@@ -55,6 +56,30 @@ module.exports = connection;
 
 
 ### More Info about this project:
+
+* The cli-table npm module was an easy way of creating nice looking tables with colored column headings in the command terminal
+  * It's easy to use... here's a code snippet demonstrating its use:
+
+```
+// these 2 lines should be near the top of your js file
+var Table = require('cli-table');
+var table = {};
+
+// create the header when you're ready to start making the table
+table = new Table({
+    head: ['Order QTY', 'Item', 'Each Price', 'Total Cost'],
+    colAligns: ['middle', 'left', 'right', 'right']
+});
+
+// populate the table when you're ready to add data to the table array
+table.push(
+    [answers.quantity, result[0].product_name, '$' + result[0].price, '$' + (result[0].price * answers.quantity).toFixed(2)]
+);
+
+// display the table in the terminal
+console.log("\n\n" + table.toString());
+```
+
 
 * To find out more about the npm modules used in this project:
   * https://www.npmjs.com/package/mysql

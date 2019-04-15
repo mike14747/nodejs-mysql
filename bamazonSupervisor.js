@@ -10,11 +10,12 @@ function viewSales() {
     connection.query("SELECT d.department_id, d.department_name, d.over_head_costs, SUM(p.product_sales) AS product_sales, (SUM(p.product_sales)-d.over_head_costs) AS total_profit FROM departments AS d INNER JOIN products AS p ON d.department_id=p.department_id GROUP BY d.department_id ORDER BY d.department_id ASC", function (error, results) {
         if (error) throw error;
         table = new Table({
-            head: ['department_id', 'department_name', 'over_head_costs', 'product_sales', 'total_profit']
+            head: ['department_id', 'department_name', 'over_head_costs', 'product_sales', 'total_profit'],
+            colAligns: ['middle', 'left', 'right', 'right', 'right']
         });
         for (let i=0; i<results.length; i++) {
             table.push(
-                [results[i].department_id, results[i].department_name, results[i].over_head_costs, results[i].product_sales, results[i].total_profit]
+                [results[i].department_id, results[i].department_name, (results[i].over_head_costs).toFixed(2), (results[i].product_sales).toFixed(2), (results[i].total_profit).toFixed(2)]
             );
         }
         console.log("\n\n" + table.toString());

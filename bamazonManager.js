@@ -13,7 +13,8 @@ function displayInv() {
         if (error) throw error;
         console.log("\n\n\n==================== Items in the Bamazon Store ====================\n");
         table = new Table({
-            head: ['Product ID', 'Item', 'Each Price', 'Department', 'In Stock']
+            head: ['Product ID', 'Item', 'Each Price', 'Department', 'In Stock'],
+            colAligns: ['middle', 'left', 'right', 'left', 'middle']
         });
         for (let i = 0; i < results.length; i++) {
             table.push(
@@ -30,7 +31,8 @@ function lowInv() {
         if (error) throw error;
         console.log("\n\n\n==================== Bamazon Low Inventory List ====================\n");
         table = new Table({
-            head: ['Product ID', 'Item', 'Each Price', 'Department', 'In Stock']
+            head: ['Product ID', 'Item', 'Each Price', 'Department', 'In Stock'],
+            colAligns: ['middle', 'left', 'right', 'left', 'middle']
         });
         for (let i = 0; i < results.length; i++) {
             table.push(

@@ -61,11 +61,12 @@ function promptUser() {
                     if (error) throw error;
                 });
                 table = new Table({
-                    head: ['Order QTY', 'Item', 'Each Price', 'Total Cost']
+                    head: ['Order QTY', 'Item', 'Each Price', 'Total Cost'],
+                    colAligns: ['middle', 'left', 'right', 'right']
                 });
 
                 table.push(
-                    [answers.quantity, result[0].product_name, '$' + result[0].price, '$' + (result[0].price * answers.quantity).toFixed(2)]
+                    [answers.quantity, result[0].product_name, '$' + (result[0].price).toFixed(2), '$' + (result[0].price * answers.quantity).toFixed(2)]
                 );
                 console.log("\n\n" + table.toString());
                 console.log("\nThank you for your order!\n");
@@ -81,7 +82,8 @@ function displayInv() {
         productIDArray = [];
         console.log("\n\n\n==================== Items in the Bamazon Store ====================\n");
         table = new Table({
-            head: ['Product ID', 'Item', 'Each Price', 'Department']
+            head: ['Product ID', 'Item', 'Each Price', 'Department'],
+            colAligns: ['middle', 'left', 'right', 'left']
         });
         for (let i = 0; i < results.length; i++) {
             productIDArray.push(results[i].product_id);
