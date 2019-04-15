@@ -84,6 +84,7 @@ console.log("\n\n" + table.toString());
 * To find out more about the npm modules used in this project:
   * https://www.npmjs.com/package/mysql
   * https://www.npmjs.com/package/inquirer
+  * https://www.npmjs.com/package/cli-table
 
 
 ### This project was created and is maintained by:
