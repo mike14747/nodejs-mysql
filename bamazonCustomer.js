@@ -67,7 +67,7 @@ function promptUser() {
                 table.push(
                     [answers.quantity, result[0].product_name, '$' + result[0].price, '$' + (result[0].price * answers.quantity).toFixed(2)]
                 );
-                console.log(table.toString());
+                console.log("\n\n" + table.toString());
                 console.log("\nThank you for your order!\n");
                 buyAgain();
             }
@@ -81,12 +81,12 @@ function displayInv() {
         productIDArray = [];
         console.log("\n\n\n==================== Items in the Bamazon Store ====================\n");
         table = new Table({
-            head: ['Product ID', 'Item', 'Each Price', 'Department', 'In Stock']
+            head: ['Product ID', 'Item', 'Each Price', 'Department']
         });
         for (let i = 0; i < results.length; i++) {
             productIDArray.push(results[i].product_id);
             table.push(
-                [results[i].product_id, results[i].product_name, '$' + results[i].price, results[i].department_name, results[i].stock_quantity]
+                [results[i].product_id, results[i].product_name, '$' + results[i].price, results[i].department_name]
             );
         }
         console.log(table.toString());

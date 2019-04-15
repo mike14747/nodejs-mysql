@@ -2,13 +2,21 @@
 
 ### What the project does:
 
-* This project is an Amazon-like command line storefront... called Bamazon.
+* This project is an Amazon-like command line storefront using nodeJS... called Bamazon.
 
-* Running 'node bamazonCustomer.js' from the terminal, you can check a list of available products, then sudo-shop and sudo-checkout
+* Running 'node bamazonCustomer.js' from the terminal, a customer can:
+  * check a list of available products
+  * sudo-shop
+  * sudo-checkout
 
-* Running 'node bamazonManager.js' from the terminal, the manager can check low inventory, add inventory and add new products and/or departments
+* Running 'node bamazonManager.js' from the terminal, the manager can:
+  * check low inventory
+  * add inventory
+  * add new products and/or departments
 
-* Running 'node bamazonSupervisor.js' from the terminal, the supervisor can view Product Sales by Department create new Departments
+* Running 'node bamazonSupervisor.js' from the terminal, the supervisor can:
+  * view Product Sales by Department
+  * create new Departments
 
 
 ### Why the project is useful:
@@ -25,7 +33,7 @@ To use this project, you'll need to do the following:
 
 * clone this repository onto your computer
 
-* run 'npm i' from the terminal (this will install the npm modules mysql and inquirer)
+* run 'npm i' from the terminal (this will install the npm modules mysql, inquirer and cli-tables)
 
 * create a mysql database using the schema in: **bamazon.sql**
 

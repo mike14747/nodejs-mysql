@@ -2,41 +2,42 @@
 
 var inquirer = require("inquirer");
 var connection = require("./connection.js");
+var Table = require('cli-table');
 
-var counter = 0;
+var table = {};
 var departmentsArray = [];
 var departmentIDArray = [];
 
 function displayInv() {
-    connection.query("SELECT p.product_id, p.product_name, p.price, p.stock_quantity, d.department_id, d.department_name FROM products AS p INNER JOIN departments AS d ON p.department_id=d.department_id ORDER BY d.department_id ASC, p.product_id ASC", function (error, results) {
+    connection.query("SELECT p.product_id, p.product_name, p.price, p.stock_quantity, d.department_id, d.department_name FROM products AS p INNER JOIN departments AS d ON p.department_id=d.department_id ORDER BY d.department_id ASC, p.product_name ASC", function (error, results) {
         if (error) throw error;
-        console.log("\n=============== Complete Bamazon Inventory ===============");
+        console.log("\n\n\n==================== Items in the Bamazon Store ====================\n");
+        table = new Table({
+            head: ['Product ID', 'Item', 'Each Price', 'Department', 'In Stock']
+        });
         for (let i = 0; i < results.length; i++) {
-            if (results[i].department_id != counter) {
-                console.log("\n--------------- " + results[i].department_name + " ---------------");
-                counter = results[i].department_id;
-            }
-            console.log("Product ID: " + results[i].product_id + " | " + results[i].product_name + " ($" + results[i].price + "/ea) | Units in Stock: " + results[i].stock_quantity);
+            table.push(
+                [results[i].product_id, results[i].product_name, '$' + results[i].price, results[i].department_name, results[i].stock_quantity]
+            );
         }
+        console.log(table.toString());
         promptManager();
     });
 }
 
 function lowInv() {
-    connection.query("SELECT p.product_id, p.product_name, p.price, p.stock_quantity, d.department_id, d.department_name FROM products AS p INNER JOIN departments AS d ON p.department_id=d.department_id WHERE p.stock_quantity <=5 ORDER BY d.department_id ASC, p.stock_quantity DESC", function (error, results) {
+    connection.query("SELECT p.product_id, p.product_name, p.price, p.stock_quantity, d.department_id, d.department_name FROM products AS p INNER JOIN departments AS d ON p.department_id=d.department_id WHERE p.stock_quantity <=20 ORDER BY d.department_id ASC, p.product_name ASC", function (error, results) {
         if (error) throw error;
-        console.log("\n=============== Bamazon Low Inventory List ===============");
-        if (results.length < 1) {
-            console.log("\nThere are no products with low inventories!\n");
-        } else {
-            for (let i = 0; i < results.length; i++) {
-                if (results[i].department_id != counter) {
-                    console.log("\n--------------- " + results[i].department_name + " ---------------");
-                    counter = results[i].department_id;
-                }
-                console.log("Product ID: " + results[i].product_id + " | " + results[i].product_name + " ($" + results[i].price + "/ea) | Units in Stock: " + results[i].stock_quantity);
-            }
+        console.log("\n\n\n==================== Bamazon Low Inventory List ====================\n");
+        table = new Table({
+            head: ['Product ID', 'Item', 'Each Price', 'Department', 'In Stock']
+        });
+        for (let i = 0; i < results.length; i++) {
+            table.push(
+                [results[i].product_id, results[i].product_name, '$' + results[i].price, results[i].department_name, results[i].stock_quantity]
+            );
         }
+        console.log(table.toString());
         promptManager();
     });
 }
