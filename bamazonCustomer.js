@@ -46,11 +46,12 @@ function promptUser() {
     inquirer.prompt([
         {
             name: "productID",
+            type: "number",
             message: "\n\nEnter the Product ID of the item you'd like to buy: ",
             validate: function validateID(productID) {
-                if (isNaN(productID) || parseInt(productID) <= 0) {
-                    return false || "ID must be a number greater than 0!";
-                } else if (productIDArray.indexOf(parseFloat(productID)) < 0) {
+                if (isNaN(productID)) {
+                    return false || "ID must be a number!";
+                } else if (productIDArray.indexOf(productID) < 0) {
                     return false || "Product ID not found in the database!"
                 }
                 return true;
@@ -58,9 +59,10 @@ function promptUser() {
         },
         {
             name: "quantity",
+            type: "number",
             message: "\n\nEnter the quantity of this item you'd like to purchase: ",
             validate: function validateQuantity(quantity) {
-                if (isNaN(quantity) || quantity < 1 || !Number.isInteger(parseFloat(quantity))) {
+                if (isNaN(quantity) || quantity < 1 || !Number.isInteger(quantity)) {
                     return false || "Quantity must be a whole number greater than 0!";
                 }
                 return true;

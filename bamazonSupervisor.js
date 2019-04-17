@@ -5,7 +5,6 @@ var connection = require("./connection.js");
 var Table = require('cli-table');
 
 var table = {};
-var ohc = 0;
 
 function viewSales() {
     connection.query("SELECT d.department_id, d.department_name, d.over_head_costs, IFNULL(SUM(p.product_sales), 0) AS product_sales, (IFNULL(SUM(p.product_sales), 0)-d.over_head_costs) AS total_profit FROM departments AS d LEFT JOIN products AS p ON d.department_id=p.department_id GROUP BY d.department_id ORDER BY d.department_id ASC", function (error, results) {
@@ -39,24 +38,19 @@ function newDepartment() {
         },
         {
             name: "ohc",
-            type: "input",
-            message: "Enter the over head costs of this new department\n(can be a number greater than or equal to 0 or left blank):",
+            type: "number",
+            message: "Enter the over head costs of this new department (must be a number greater than or equal to 0):",
             validate: function (ohc) {
-                if (ohc.length > 0 && (isNaN(ohc) || ohc < 0)) {
-                    return false || "The over head costs of the new department must be either a number greater than or equal to 0 or left blank!";
+                if (isNaN(ohc) || ohc < 0) {
+                    return false || "The over head costs of the new department must be either a number greater than or equal to 0!";
                 }
                 return true;
             }
         }
     ]).then(function (answers) {
-        if (answers.ohc == "") {
-            ohc = 0;
-        } else {
-            ohc = parseFloat(answers.ohc);
-        }
-        connection.query("INSERT INTO departments SET ?", { department_name: answers.newDepart, over_head_costs: ohc }, function (error) {
+        connection.query("INSERT INTO departments SET ?", { department_name: answers.newDepart, over_head_costs: answers.ohc }, function (error) {
             if (error) throw error;
-            console.log("\n'" + answers.newDepart + "' has been added to the departments table in the database with its over_head_costs set to: '$" + ohc.toFixed(2) + "'.\n")
+            console.log("\n'" + answers.newDepart + "' has been added to the departments table in the database with its over_head_costs set to: '$" + answers.ohc.toFixed(2) + "'.\n")
             promptSuper();
         });
     });

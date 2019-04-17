@@ -48,10 +48,10 @@ function addInv() {
     inquirer.prompt([
         {
             name: "productID",
-            type: "input",
+            type: "number",
             message: "\nEnter the product ID of the item you'd like to add inventory to:",
             validate: function validateID(productID) {
-                if (isNaN(productID) || parseInt(productID) <= 0 || !Number.isInteger(parseFloat(productID))) {
+                if (isNaN(productID) || productID <= 0 || !Number.isInteger(productID)) {
                     return false || "ID must be a number greater than 0!";
                 }
                 return true;
@@ -59,17 +59,17 @@ function addInv() {
         },
         {
             name: "quantity",
-            type: "input",
+            type: "number",
             message: "\nEnter the quantity you'd like to add to this item's inventory:",
             validate: function validateQuantity(quantity) {
-                if (isNaN(quantity) || parseInt(quantity) <= 0 || !Number.isInteger(parseFloat(quantity))) {
+                if (isNaN(quantity) || quantity < 0 || !Number.isInteger(quantity)) {
                     return false || "Quantity being added must be a whole number greater than 0!";
                 }
                 return true;
             }
         }
     ]).then(function (answers) {
-        connection.query("UPDATE products SET stock_quantity = stock_quantity + ? WHERE product_id = ?", [parseInt(answers.quantity), answers.productID], function (error, result) {
+        connection.query("UPDATE products SET stock_quantity = stock_quantity + ? WHERE product_id = ?", [answers.quantity, answers.productID], function (error, result) {
             if (error) throw error;
             if (result.affectedRows < 1) {
                 console.log("\nYou entered an invalid product ID, so the inventory could not be updated!\n");
@@ -97,15 +97,16 @@ function newProd() {
         {
             name: "department",
             type: "list",
+            pageSize: 20,
             message: "\nSelect the department for this new product:",
             choices: departmentsArray
         },
         {
             name: "price",
-            type: "input",
+            type: "number",
             message: "\nEnter the price for the new product (in this format: 12.99)",
             validate: function validatePrice(price) {
-                if (isNaN(price) || parseFloat(price) <= 0 || price.length < 1) {
+                if (isNaN(price) || price <= 0 || price.length < 1) {
                     return false || "Price must be a number greater than 0!";
                 }
                 return true;
@@ -113,10 +114,10 @@ function newProd() {
         },
         {
             name: "stock_quantity",
-            type: "input",
+            type: "number",
             message: "\nEnter the stock quantity for this new product:",
             validate: function validateQuantity(stock_quantity) {
-                if (isNaN(stock_quantity) || parseInt(stock_quantity) < 0 || stock_quantity.length < 1 || !Number.isInteger(parseFloat(stock_quantity))) {
+                if (isNaN(stock_quantity) || stock_quantity < 0 || stock_quantity.length < 1 || !Number.isInteger(stock_quantity)) {
                     return false || "Stock quantity must be a whole number greater than or equal to 0!";
                 }
                 return true;
